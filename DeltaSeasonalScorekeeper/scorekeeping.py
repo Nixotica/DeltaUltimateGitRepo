@@ -87,6 +87,8 @@ def print_help() -> None:
 
 
 def print_all_seasons() -> None:
+    if not os.path.exists(SEASONS_PATH):
+        print("No seasons created yet!")
     for dir in os.listdir(SEASONS_PATH):
         print(dir)
 
