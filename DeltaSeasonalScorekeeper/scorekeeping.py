@@ -102,14 +102,17 @@ def populate_season_with_template(name: str) -> None:
         print(f"Season with name {name} does not exist!")
         return
 
-    shutil.copytree(SEASON_TEMPLATE_PATH, )
-
+    shutil.copytree(SEASON_TEMPLATE_PATH, path_to_populate)
+    print(f"Successfully populated season {path_to_populate} with template!")
 
 
 def handle_new_season(name: str) -> None:
     """
     Create a new season folder with the provided name if it doesn't exist.
     """
+    if not os.path.exists(SEASONS_PATH):
+        os.makedirs(SEASONS_PATH)
+
     path_to_make = os.path.join(SEASONS_PATH, name)
     if os.path.exists(path_to_make):
         print("Season with that name already exists!")
