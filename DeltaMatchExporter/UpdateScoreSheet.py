@@ -49,6 +49,5 @@ if __name__ == "__main__":
     service = build('sheets', 'v4', credentials=creds)
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=PLAYER_BANK_RANGE).execute()
-    values = result.get('values', [])
-    for row in values:
-        print(row)
+    values = result.get('values')
+    print(values)
