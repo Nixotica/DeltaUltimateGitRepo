@@ -93,8 +93,8 @@ if __name__ == "__main__":
     print(f"{result.get('updatedCells')} cells updated.")
 
     # Wait for a second because this can take some time
-    # print("Waiting 10 seconds to avoid race condition...")
-    # time.sleep(10)
+    print("Waiting 10 seconds to avoid race condition...")
+    time.sleep(10)
 
     # Get the player list again from the scoresheet column (this will be used to update positions)
     result = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=PLAYER_MATCH_NAME_RANGE).execute()
