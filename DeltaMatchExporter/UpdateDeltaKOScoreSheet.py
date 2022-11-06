@@ -87,7 +87,7 @@ if __name__ == "__main__":
     body = {'values': players_to_add}
     result = service.spreadsheets().values().update(
         spreadsheetId=SPREADSHEET_ID,
-        range=f'Season 2!A{RANGE_IDXS[0] + len(player_bank)}:A{RANGE_IDXS[0] + len(player_bank) + len(players_to_add) - 1}',
+        range=f'Season {season_num}!A{RANGE_IDXS[0] + len(player_bank)}:A{RANGE_IDXS[0] + len(player_bank) + len(players_to_add) - 1}',
         valueInputOption="USER_ENTERED",
         body=body).execute()
     print(f"{result.get('updatedCells')} cells updated.")
@@ -103,7 +103,7 @@ if __name__ == "__main__":
         player_locations_in_sheet = [player_locations_in_sheet[i][0] for i in range(len(player_locations_in_sheet))]
     else:
         player_locations_in_sheet = []
-    position_write_locations = [''] * len(player_locations_in_sheet)
+    position_write_locations = [[' ']] * len(player_locations_in_sheet)
     for player_data in player_order:
         player_location_in_sheet = player_locations_in_sheet.index(player_data[0])
         position_write_locations[player_location_in_sheet] = [str(player_data[1])]
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     body = {'values': position_write_locations}
     result = service.spreadsheets().values().update(
         spreadsheetId=SPREADSHEET_ID,
-        range=f'Season 2!E{RANGE_IDXS[0]}:E{RANGE_IDXS[0] + len(position_write_locations) - 1}',
+        range=f'Season {season_num}!{match_idx}{RANGE_IDXS[0]}:{match_idx}{RANGE_IDXS[0] + len(position_write_locations) - 1}',
         valueInputOption="USER_ENTERED",
         body=body).execute()
     print(f"{result.get('updatedCells')} cells updated.")
