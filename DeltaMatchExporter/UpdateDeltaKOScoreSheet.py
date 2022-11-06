@@ -42,7 +42,11 @@ if __name__ == "__main__":
     # If it isn't, then delete the last rows of the csv until it aligns with the latest valid match
     url = "https://match-export.evotm.com/delta-ko/download.php?match=1"
     response = requests.get(url)
-    open(f"season_{season_num}_match_{match_num}.csv", "wb").write(response.content)
+    if not os.path.exists(f"season_{season_num}_match_{match_num}.csv"):
+        open(f"season_{season_num}_match_{match_num}.csv", "wb").write(response.content)
+    else:
+        print(f"Did not download any new match content, data for season {season_num} match {match_num} already exists. "
+              f"If this seems incorrect, then please delete the relevant csv files and try again.")
 
     # Read the relevant information out of the CSV
     with open(f'season_{season_num}_match_{match_num}.csv') as matchstats:
